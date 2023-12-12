@@ -1,0 +1,35 @@
+-- cloner un repo
+    git clone #URL#
+
+-- se synchroniser sur une branche nouvellement créée
+    git fetch origin # nom de branche #
+    git pull origin # nom de branche #
+
+-- se positionner sur une branche 
+    git switch # nom de branche #
+
+-- valider les changements
+    -- ajouter les fichiers modifiés 
+        git add # chemin relatif du fichier/ dossier #
+    -- valider les changements
+        git commit -m "MESSAGE"
+
+-- envoyer les modifications vers GITHUB
+    git push origin # nom de branche #
+
+
+
+
+--  etat des fichier
+    git status 
+    
+-- lister les branches
+    git branch
+
+-- crééer une branche 
+    git branch # nom de branche #
+
+-- supprimer une branche 
+    git branch -d # nom de branche #
+
+
