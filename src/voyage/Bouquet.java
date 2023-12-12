@@ -6,12 +6,12 @@ import generalisation.annotations.DBField;
 import generalisation.annotations.DBTable;
 import generalisation.genericDAO.GenericDAO;
 
-@DBTable(name = "person", autoIncrement = true)
+@DBTable(name = "bouquet", autoIncrement = true)
 public class Bouquet {
-    @DBField(name="id_person", isPrimaryKey = true)
+    @DBField(name="idbouquet", isPrimaryKey = true)
     Integer idBouquet;
 
-    @DBField(name="id_person", isPrimaryKey = true)
+    @DBField(name="nombouquet")
     String nomBouquet;
 
     Vector<Activite> activites = new Vector<Activite>();
