@@ -1,3 +1,11 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import = "java.util.*" %>
+<%@ page import = "voyage.*" %>
+
+<%
+    List<Bouquet> bouquets = (List<Bouquet>)request.getAttribute("bouquets");
+%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -52,7 +60,7 @@ button:hover {
 
 </style>
 <body>
-    <form action="activite" method="get">
+    <form action="bouquet_by_id" method="get">
         <select name="listeActivite" id="listeActivite">
             <option value="option1">Option 1</option>
             <option value="option2">Option 2</option>

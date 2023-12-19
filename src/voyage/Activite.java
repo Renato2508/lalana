@@ -4,15 +4,23 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+import java.util.Vector;
+import java.util.ArrayList;
+import java.util.List;
+
 public class Activite{
     Integer idActivite;
     String nomActivite;
-    Bouquet bouquet;
+    List<Bouquet> bouquets;
     
 
-    public Activite(String nomActivite, Bouquet bouquet) {
+    
+
+    public Activite() {
+    }
+
+    public Activite(String nomActivite) {
         this.nomActivite = nomActivite;
-        this.bouquet = bouquet;
     }
 
     public Activite(Integer idActivite, String nomActivite) {
@@ -47,8 +55,11 @@ public class Activite{
             stmt.executeUpdate(sql1);
 
             int id = Activite.getMaxId(conn);
-            String sql2 = String.format("insert into activitebouquet values(%d, %d)", id, this.bouquet.getIdBouquet());
-            stmt.executeUpdate(sql2);
+            for(Bouquet bouquet: this.bouquets){
+                String sql2 = String.format("insert into activitebouquet values(%d, %d)", id, bouquet.getIdBouquet());
+                stmt.executeUpdate(sql2);
+            }
+            
 
         } catch (Exception e) {
             try {
@@ -76,11 +87,13 @@ public class Activite{
         this.nomActivite = nomActivite;
     }
 
-    public Bouquet getBouquet() {
-        return bouquet;
+    public List<Bouquet> getBouquets() {
+        return bouquets;
     }
 
-    public void setBouquet(Bouquet bouquet) {
-        this.bouquet = bouquet;
+    public void setBouquets(ArrayList<Bouquet> bouquets) {
+        this.bouquets = bouquets;
     }
+
+
 }

@@ -1,10 +1,16 @@
 package voyage;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.Vector;
+
+import javax.xml.transform.Source;
 
 import generalisation.annotations.DBField;
 import generalisation.annotations.DBTable;
 import generalisation.genericDAO.GenericDAO;
+import java.sql.Statement;
 
 @DBTable(name = "bouquet", autoIncrement = true)
 public class Bouquet {
@@ -14,10 +20,14 @@ public class Bouquet {
     @DBField(name="nombouquet")
     String nomBouquet;
 
-    Vector<Activite> activites = new Vector<Activite>();
-
+    ArrayList<Activite> activites = new ArrayList<Activite>();
 
     
+    
+    public Bouquet() {
+    }
+
+
     public Bouquet(String nomBouquet) {
         this.nomBouquet = nomBouquet;
     }
@@ -31,6 +41,37 @@ public class Bouquet {
     public Bouquet(Integer idBouquet, String nomBouquet) {
         this.idBouquet = idBouquet;
         this.nomBouquet = nomBouquet;
+    }
+
+
+    public static Bouquet getById(String id, Connection conn) throws Exception{
+        ArrayList<Bouquet> res = new ArrayList<Bouquet>();
+        int id_req = Integer.valueOf(id);
+        try {
+            String sql = String.format("SELECT * FROM v_activitebouquet where idbouquet = %d order byidbouquet asc ", id_req);
+
+            System.out.println("******* SOURCE: "+sql);
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+
+            Bouquet bouquet;
+            Activite activite = new Activite();
+            //batiment.setIdBatiment(-1);
+            rs.next();
+            bouquet = new Bouquet(rs.getInt("idbouquet"),rs.getString("nomBouquet"));
+            while (rs.next()) {
+                
+                activite = new Activite(rs.getInt("idactivite"), rs.getString("nomactivite"));
+                bouquet.getActivites().add(activite);
+
+            }
+
+            return bouquet;
+            
+        } catch (Exception e) {
+            throw e  ;      
+        }
+           
     }
 
 
@@ -54,10 +95,10 @@ public class Bouquet {
     public void setNomBouquet(String nomBouquet) {
         this.nomBouquet = nomBouquet;
     }
-    public Vector<Activite> getActivites() {
+    public ArrayList<Activite> getActivites() {
         return activites;
     }
-    public void setActivites(Vector<Activite> activites) {
+    public void setActivites(ArrayList<Activite> activites) {
         this.activites = activites;
     }
 

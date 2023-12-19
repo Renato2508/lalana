@@ -16,16 +16,11 @@ CREATE TABLE Bouquet (
 CREATE TABLE ActiviteBouquet (
     idActiviteBouquet SERIAL PRIMARY KEY,
     idActivite INT,
+    
     idBouquet INT,
     FOREIGN KEY (idActivite) REFERENCES Activite(idActivite),
     FOREIGN KEY (idBouquet) REFERENCES Bouquet(idBouquet)
 );
-
--- CREATE VIEW VueActiviteBouquet AS
--- SELECT ab.idActivite, a.NomActivite, ab.idBouquet, b.NomBouquet
--- FROM ActiviteBouquet ab
--- JOIN Activite a ON ab.idActivite = a.idActivite
--- JOIN Bouquet b ON ab.idBouquet = b.idBouquet;
 
 -- Insertion de données dans la table Activite
 INSERT INTO Activite (idActivite, NomActivite) VALUES
@@ -46,10 +41,9 @@ INSERT INTO ActiviteBouquet (idActiviteBouquet, idActivite, idBouquet) VALUES
     (3, 3, 2),
     (4, 1, 3);
 
-CREATE VIEW VueActiviteBouquet AS
-SELECT ab.idActiviteBouquet, a.idActivite, a.NomActivite, b.idBouquet, b.NomBouquet
-FROM ActiviteBouquet ab
-JOIN Activite a ON ab.idActivite = a.idActivite
-JOIN Bouquet b ON ab.idBouquet = b.idBouquet;
 
-SELECT * FROM VueActiviteBouquet;
+CREATE VIEW v_ActiviteBouquet AS
+    SELECT  b.idBouquet, b.NomBouquet, a.idActivite, a.NomActivite
+    FROM ActiviteBouquet as ab
+    JOIN Activite as a ON ab.idActivite = a.idActivite
+    JOIN Bouquet as b ON ab.idBouquet = b.idBouquet;
