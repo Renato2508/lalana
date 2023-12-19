@@ -3,6 +3,7 @@ package voyage;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Vector;
 
 import javax.xml.transform.Source;
@@ -41,6 +42,14 @@ public class Bouquet {
     public Bouquet(Integer idBouquet, String nomBouquet) {
         this.idBouquet = idBouquet;
         this.nomBouquet = nomBouquet;
+    }
+
+
+    public static List<Bouquet> getAll() throws Exception{
+        try {
+            return GenericDAO.getAll(Bouquet.class);
+        } catch (Exception e) {
+            throw e;        }
     }
 
 

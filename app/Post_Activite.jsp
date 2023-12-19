@@ -84,25 +84,10 @@
         <input type="text">
         <p>Bouquets rattachés</p>
         <label for="rattaché">
-            <input type="checkbox" id="premium" name="rattaché"> Premium
+            <% for(Bouquet bouquet : bouquets) { %>
+            <%bouquet.getNomBouquet();%><input type="checkbox" name="<%bouquet.getNomBouquet();%>" id="premium" >           
+            <%}%> 
         </label>
-        <br>
-        <label for="rattaché">
-            <input type="checkbox" id="gold" name="rattaché"> Gold
-        </label>
-        <br>
-        <label for="rattaché">
-            <input type="checkbox" id="decouverte" name="rattaché"> Découverte
-        </label>
-        <br>
-        <label for="rattaché">
-            <input type="checkbox" id="VIP" name="rattaché"> V.I.P
-        </label>
-
-        <p>
-            <input type="submit" value="Enregistrer">
-        </p>
-
     </form>
 </body>
 </html>

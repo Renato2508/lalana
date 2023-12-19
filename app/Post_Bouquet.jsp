@@ -61,7 +61,7 @@ button:hover {
     <form action="bouquet" method="post">
         <label for="nomBouquet">Nom de votre bouquet</label>
         <input name="nomBouquet" type="text" id="nomBouquet">
-        <button>Enregistrer</button>
+        <input type="submit" value="Enregistrer">
     </form>
 </body>
 </html>
