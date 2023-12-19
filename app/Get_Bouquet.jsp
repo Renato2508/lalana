@@ -61,10 +61,10 @@ button:hover {
 </style>
 <body>
     <form action="bouquet_by_id" method="get">
-        <select name="listeActivite" id="listeActivite">
-            <option value="option1">Option 1</option>
-            <option value="option2">Option 2</option>
-            <option value="option3">Option 3</option>
+        <select name="id_bouquet" id="listeActivite">7
+            <%for(Bouquet bouquet : bouquets){%>
+            <option value="<%bouquet.getIdBouquet();%>"><%bouquet.getNomBouquet();%></option>
+            <%}%>
         </select>
         <button>Afficher la liste</button>
     </form>

@@ -1,4 +1,10 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import = "java.util.*" %>
+<%@ page import = "voyage.*" %><!DOCTYPE html>
+
+<%  Bouquet b = (Bouquet)request.getAttribute("bouquet");
+    List<Activite> acts = b.getActivites();
+%>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -40,9 +46,9 @@ li:hover {
 </style>
 <body>
     <ul>
-        <li>a</li>
-        <li>b</li>
-        <li>c</li>
+        <%for(Activite activite : acts) { %>
+        <li><%acts.getNomActivite();%></li>
+        <%}%>
     </ul>
     <button><a href="Get_Bouquet.html">Retour</a></button>
 </body>
