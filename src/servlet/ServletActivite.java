@@ -25,7 +25,8 @@ public class ServletActivite extends HttpServlet {
                 ArrayList<Bouquet> bouquetsValides = new ArrayList<Bouquet>();
                 List<Bouquet> bouquets = GenericDAO.getAll(Bouquet.class);
                 for(Bouquet bouquet: bouquets){
-                    if(request.getParameter(bouquet.getNomBouquet()) != null){
+                    //System.out.println("CB: "+ request.getParameter(String.valueOf(bouquet.getIdBouquet())));
+                    if(request.getParameter(String.valueOf(bouquet.getIdBouquet()))!= null){
                         bouquetsValides.add(bouquet);
                     }
                 }
@@ -33,7 +34,7 @@ public class ServletActivite extends HttpServlet {
                 Connection c = GenericDAO.getConnection();
                 activite.save(c);
                 c.close();
-
+                response.sendRedirect("index.html");
             } catch (Exception e) {
                 e.printStackTrace();
             }

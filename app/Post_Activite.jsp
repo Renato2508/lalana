@@ -81,13 +81,14 @@
 <body>
     <form action="activite" method="post">
         <label for="nomActivite">Nom de l'activité</label>
-        <input type="text">
+        <input name="nomActivite" type="text">
         <p>Bouquets rattachés</p>
         <label for="rattaché">
             <% for(Bouquet bouquet : bouquets) { %>
-            <%bouquet.getNomBouquet();%><input type="checkbox" name="<%bouquet.getNomBouquet();%>" id="premium" >           
+            <% out.print(bouquet.getNomBouquet()); %><input type="checkbox" name="<%=bouquet.getIdBouquet() %>" id="premium" >           
             <%}%> 
         </label>
+        <label><input type="submit" value="Creer l'activite"> </label>
     </form>
 </body>
 </html>

@@ -24,11 +24,12 @@ public class ServletBouquet  extends HttpServlet{
                 
             }
             request.setAttribute(nomBouquet, nomBouquet);
-            response.sendRedirect("Post_Bouquet.html");
+            response.sendRedirect("Post_Bouquet.jsp");
         }
 
         protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
             try {
+                // liste de tous les bouquets existantsp
                 List<Bouquet> bouquets = GenericDAO.getAll(Bouquet.class);
                 request.setAttribute("bouquets", bouquets);
                 RequestDispatcher rd = request.getRequestDispatcher("Post_Activite.jsp");

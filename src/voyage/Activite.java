@@ -5,12 +5,22 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 import java.util.Vector;
+
+import generalisation.annotations.DBField;
+import generalisation.annotations.DBTable;
+
 import java.util.ArrayList;
 import java.util.List;
 
+
+@DBTable(name = "activite", autoIncrement = true)
 public class Activite{
+    @DBField(name="idactivite", isPrimaryKey = true)
     Integer idActivite;
+
+    @DBField(name="nomactivite")
     String nomActivite;
+
     List<Bouquet> bouquets;
     
 
@@ -48,7 +58,7 @@ public class Activite{
     }
 
     public void save(Connection conn) throws Exception{
-        String sql1 = String.format("insert into activite values('%s')", this.nomActivite);
+        String sql1 = String.format("insert into activite(nomactivite) values('%s')", this.nomActivite);
         System.out.println("#### INSERTION ACTIVITE: "+sql1);
         try {
             Statement stmt = conn.createStatement();
@@ -56,10 +66,10 @@ public class Activite{
 
             int id = Activite.getMaxId(conn);
             for(Bouquet bouquet: this.bouquets){
-                String sql2 = String.format("insert into activitebouquet values(%d, %d)", id, bouquet.getIdBouquet());
+                String sql2 = String.format("insert into activitebouquet(idactivite, idbouquet) values(%d, %d)", id, bouquet.getIdBouquet());
                 stmt.executeUpdate(sql2);
             }
-            
+            conn.commit();
 
         } catch (Exception e) {
             try {
@@ -68,6 +78,9 @@ public class Activite{
             } catch (Exception e1) {
                 throw e1;
             }
+        }
+        finally{
+            conn.close();
         }
     }
 
