@@ -9,7 +9,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ListeBouquets</title>
+    <title>Liste Bouquets</title>
     <h1>Liste d'Activités pour le bouquet</h1>
 </head>
 <style>
@@ -45,11 +45,12 @@ li:hover {
 
 </style>
 <body>
+    <p><h2>Liste des activités pour le bouquet: <% out.print(b.getNomBouquet()); %> </h2></p>
     <ul>
         <%for(Activite activite : acts) { %>
-        <li><%acts.getNomActivite();%></li>
+        <li><% out.print(activite.getNomActivite()); %></li>
         <%}%>
     </ul>
-    <button><a href="Get_Bouquet.html">Retour</a></button>
+    <button><a href="index.html">Retour</a></button>
 </body>
 </html>

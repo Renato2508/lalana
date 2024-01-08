@@ -18,7 +18,7 @@ import generalisation.genericDAO.GenericDAO;
 
 
 @WebServlet("/bouquet_by_id")
-public class ServletBouquet2 extends HttpServlet {
+public class ServletBouquet_id extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
         // liste des bouquets  pour l'id donne
         String id_bouquet = request.getParameter("id_bouquet");

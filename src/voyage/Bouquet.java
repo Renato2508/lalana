@@ -54,10 +54,9 @@ public class Bouquet {
 
 
     public static Bouquet getById(String id, Connection conn) throws Exception{
-        ArrayList<Bouquet> res = new ArrayList<Bouquet>();
         int id_req = Integer.valueOf(id);
         try {
-            String sql = String.format("SELECT * FROM v_activitebouquet where idbouquet = %d order byidbouquet asc ", id_req);
+            String sql = String.format("SELECT * FROM v_activitebouquet where idbouquet = %d order by idbouquet asc ", id_req);
 
             System.out.println("******* SOURCE: "+sql);
             Statement stmt = conn.createStatement();
