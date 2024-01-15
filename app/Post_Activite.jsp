@@ -80,8 +80,22 @@
 
 <body>
     <form action="activite" method="post">
-        <label for="nomActivite">Nom de l'activité</label>
-        <input name="nomActivite" type="text">
+        <p>
+            <label for="nomActivite">Nom de l'activité</label>
+            <input name="nomActivite" type="text">
+        <p>
+
+        <p>
+            <label for="nomActivite">P.U. de l'activité</label>
+            <input name="prix" type="text">
+        <p>
+
+        <p>
+            <label for="nomActivite">Date de creaion/MAJ de l'activité</label>
+            <input name="date" type="date">
+        <p>
+
+        
         <p>Bouquets rattachés</p>
         <label for="rattaché">
             <% for(Bouquet bouquet : bouquets) { %>

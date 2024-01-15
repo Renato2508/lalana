@@ -13,14 +13,16 @@ import jakarta.servlet.http.HttpServletResponse;
 import voyage.Bouquet;
 import voyage.Activite;
 import java.util.ArrayList;
-import java.sql.Connection;
 
 @WebServlet("/activite")
 public class ServletActivite extends HttpServlet {
         protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
             String nom = request.getParameter("nomActivite");
-            Activite activite = new Activite(nom);
+            String prix = request.getParameter("prix");
+            String date = request.getParameter("date");
+
+            Activite activite = new Activite(nom, prix, date);
             try {
                 ArrayList<Bouquet> bouquetsValides = new ArrayList<Bouquet>();
                 List<Bouquet> bouquets = GenericDAO.getAll(Bouquet.class);
@@ -31,9 +33,7 @@ public class ServletActivite extends HttpServlet {
                     }
                 }
                 activite.setBouquets(bouquetsValides);
-                Connection c = GenericDAO.getConnection();
-                activite.save(c);
-                c.close();
+                activite.save();
                 response.sendRedirect("index.html");
             } catch (Exception e) {
                 e.printStackTrace();
