@@ -19,6 +19,11 @@ public class Duree{
     Integer dureeMax;   
 
 
+    public Duree(Integer idDuree, String nomDuree) {
+        this.idDuree = idDuree;
+        this.nomDuree = nomDuree;
+    }
+
     public Duree(int idduree){
         this.idDuree = idduree;
     }

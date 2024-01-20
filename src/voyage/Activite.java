@@ -13,6 +13,7 @@ import generalisation.annotations.DBTable;
 import generalisation.genericDAO.GenericDAO;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -27,6 +28,7 @@ public class Activite{
     List<Bouquet> bouquets;
     double prix;
     Date date_maj;
+    static HashMap<Integer, Activite> all;    
     
 
     public Activite(String nomActivite, String prix, String date_maj) {
@@ -56,6 +58,79 @@ public class Activite{
     }
 
     // METHODS
+
+    public void achat(int nb, Date d) throws Exception{
+        Connection c = null;
+        try{
+            c = GenericDAO.getConnection();
+            String query = "INSERT INTO mouvement (date_mvt, idactivite, qte_mvt) VALUES (?, ?, ?)";
+        
+        // Préparation de la requête SQL paramétrée
+            PreparedStatement statement = c.prepareStatement(query);
+            // Récupération des attributs pour l'insertion
+            
+            // Attribution des valeurs aux paramètres de la requête
+            statement.setDate(1, d);
+            statement.setInt(2, idActivite);
+            statement.setInt(3, nb);
+            
+            // Exécution de la requête d'insertion
+            statement.executeUpdate();
+            c.commit();
+        }
+        catch(Exception e){
+            try {
+                c.rollback();
+            } catch (Exception e2) {
+                throw e2;
+            }
+            throw e;
+        }
+        finally{
+            c.close();        
+        }
+    }
+
+    public static HashMap<Integer,Activite> generateHashMap()throws Exception {
+        HashMap<Integer,Activite> hm;
+        try {
+            hm = new HashMap<Integer,Activite>();
+            List<Activite> bouquets = GenericDAO.getAll(Activite.class);
+            for(Activite a : bouquets){
+                hm.put(a.getIdActivite(), a);
+            }
+            return hm;
+        } catch (Exception e) {
+            throw e;
+        }
+
+    }
+
+    public void reserver(int nb, Date d, Connection c)throws Exception{
+        String query = "INSERT INTO mouvement (date_mvt, idactivite, qte_mvt) VALUES (?, ?, ?)";
+        
+        // Préparation de la requête SQL paramétrée
+        try (PreparedStatement statement = c.prepareStatement(query)) {
+            // Récupération des attributs pour l'insertion
+            
+            // Attribution des valeurs aux paramètres de la requête
+            statement.setDate(1, d);
+            statement.setInt(2, idActivite);
+            statement.setInt(3, -1*nb);
+            
+            // Exécution de la requête d'insertion
+            statement.executeUpdate();
+        }
+        catch(Exception e){
+            try {
+                c.rollback();
+            } catch (Exception e2) {
+                throw e2;
+            }
+            throw e;
+        }
+        
+    }
 
     public static int getMaxId(Connection conn)throws Exception{
         String req = "select max(idactivite) as maxid from activite";
@@ -114,6 +189,14 @@ public class Activite{
 
 
     // GET SET
+
+    public static HashMap<Integer, Activite> getAll() {
+        return all;
+    }
+
+    public static void setAll(HashMap<Integer, Activite> all) {
+        Activite.all = all;
+    }
 
     public Integer getIdActivite() {
         return idActivite;

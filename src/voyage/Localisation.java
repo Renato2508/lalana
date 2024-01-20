@@ -13,6 +13,12 @@ public class Localisation {
     String nomLocalisation;
 
 
+    public Localisation(Integer idLocalisation, String nomLocalisation) {
+        this.idLocalisation = idLocalisation;
+        this.nomLocalisation = nomLocalisation;
+    }
+
+
     public Localisation(Integer idLocalisation) {
         this.idLocalisation = idLocalisation;
     }

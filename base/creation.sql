@@ -1,3 +1,6 @@
+create database voyage;
+\c voyage
+
 -- Création des tables
 
 -- Table activite
@@ -51,24 +54,21 @@ create table activite_prix(
     prixunitaire numeric(11,2) not null
 );
 
--- Création des vues
 
--- Vue v_activite_bouquet_all
-CREATE VIEW v_activite_bouquet_all AS
-    SELECT ab.idActiviteBouquet, a.idActivite, a.nomactivite, getlastprix(a.idactivite) as prixunitaire, b.idBouquet, b.nombouquet
-    FROM activitebouquet ab
-    Natural JOIN activite a 
-    natural JOIN bouquet b;
 
--- Vue v_composition
-CREATE VIEW v_composition AS
-    SELECT vab.idbouquet, vab.nombouquet, vab.idactivite, vab.nomactivite, c.idLocalisation, l.nomlocalisation, c.idduree, d.nomduree, d.dureeMin, d.dureeMax, c.frequence, vab.prixunitaire
-    FROM composition c
-    natural JOIN v_activite_bouquet_all vab 
-    natural JOIN localisation l 
-    natural JOIN duree d ;
 
-CREATE VIEW v_bouquet_prix AS
-    SELECT idbouquet, nombouquet, idlocalisation, nomlocalisation, idduree, nomduree, sum(prixunitaire*frequence) as prix
-    FROM v_composition as vc
-    group by idbouquet, nombouquet, idLocalisation, nomlocalisation, idduree, nomduree;
+create table mouvement(
+    id_mvt serial primary key,
+    date_mvt date,
+    qte_mvt numeric,
+    idActivite INT REFERENCES activite(idactivite)
+
+);
+
+create table reservation(
+    idbouquet int references bouquet(idbouquet),
+    idLocalisation INT REFERENCES localisation(idLocalisation),
+    idduree INT REFERENCES duree(idduree),
+    qte_reservee INT,
+    date_reservation date
+);

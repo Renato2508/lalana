@@ -40,6 +40,8 @@ public class Composition {
     public Composition() {
     }
 
+    
+
     public static List<Composition> getByFourchette(double prix1, double prix2, Connection c) throws Exception {
         List<Composition> compositions = new ArrayList<>();
         String query = "SELECT * FROM v_bouquet_prix WHERE prix BETWEEN ? AND ? order by prix asc";
