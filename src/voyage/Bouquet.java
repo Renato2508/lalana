@@ -56,7 +56,7 @@ public class Bouquet {
     public static Bouquet getById(String id, Connection conn) throws Exception{
         int id_req = Integer.valueOf(id);
         try {
-            String sql = String.format("SELECT * FROM v_activitebouquet where idbouquet = %d order by idbouquet asc ", id_req);
+            String sql = String.format("SELECT * FROM v_activite_bouquet_all where idbouquet = %d order by idbouquet asc ", id_req);
 
             System.out.println("******* SOURCE: "+sql);
             Statement stmt = conn.createStatement();
@@ -67,6 +67,8 @@ public class Bouquet {
             //batiment.setIdBatiment(-1);
             rs.next();
             bouquet = new Bouquet(rs.getInt("idbouquet"),rs.getString("nomBouquet"));
+            activite = new Activite(rs.getInt("idactivite"), rs.getString("nomactivite"));
+            bouquet.getActivites().add(activite);
             while (rs.next()) {
                 
                 activite = new Activite(rs.getInt("idactivite"), rs.getString("nomactivite"));

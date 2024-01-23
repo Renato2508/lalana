@@ -22,6 +22,17 @@ CREATE TABLE ActiviteBouquet (
     FOREIGN KEY (idBouquet) REFERENCES Bouquet(idBouquet)
 );
 
+
+CREATE VIEW v_ActiviteBouquet AS
+    SELECT  b.idBouquet, b.NomBouquet, a.idActivite, a.NomActivite
+    FROM ActiviteBouquet as ab
+    JOIN Activite as a ON ab.idActivite = a.idActivite
+    JOIN Bouquet as b ON ab.idBouquet = b.idBouquet;
+
+
+
+
+
 -- Insertion de données dans la table Activite
 INSERT INTO Activite (idActivite, NomActivite) VALUES
     (1, 'Activite1'),
@@ -42,8 +53,3 @@ INSERT INTO ActiviteBouquet (idActiviteBouquet, idActivite, idBouquet) VALUES
     (4, 1, 3);
 
 
-CREATE VIEW v_ActiviteBouquet AS
-    SELECT  b.idBouquet, b.NomBouquet, a.idActivite, a.NomActivite
-    FROM ActiviteBouquet as ab
-    JOIN Activite as a ON ab.idActivite = a.idActivite
-    JOIN Bouquet as b ON ab.idBouquet = b.idBouquet;
