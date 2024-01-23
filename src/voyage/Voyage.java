@@ -152,7 +152,7 @@ public class Voyage {
             compo = new Composit(activite, resultSet.getInt("frequence")); 
             System.out.println("COMPO_C:    "+compo);     
             v.getComposition().add(compo);
-            System.out.println("Liste dee la composition deu voyage: "+this.composition);
+            //System.out.println("Liste dee la composition deu voyage: "+this.composition);
 
 
             }
