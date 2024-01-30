@@ -41,7 +41,7 @@ public class Employe {
     public Employe() {
     }
 
-    public static List<Employe> getWithActualProfiles(String date) throws Exception{
+    public static List<Employe> getWithActualProfiles() throws Exception{
         String req = "select * from v_taux_horaire_actuel_final ";
         Connection c;
         ArrayList<Employe> res = new ArrayList<Employe>();

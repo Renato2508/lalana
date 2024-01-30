@@ -87,12 +87,12 @@ create table profil(
     expMin DECIMAL(10, 2) DEFAULT 0,
     expMax DECIMAL(10, 2),
     tauxAug DECIMAL(10, 2),
-    tipe VARCHAR(3) DEFAULT "ref",
+    tipe VARCHAR(3) DEFAULT "notref",
     tauxHor DECIMAL(10, 2)
 );
 
 --Table Emplpoye
-create table(
+create table employe(
     idEmploye serial PRIMARY KEY,
     nom VARCHAR(30),
     dateEmbauche date,
