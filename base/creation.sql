@@ -79,3 +79,24 @@ create table reservation(
     date_reservation date,
     idclient int references client(idclient)
 );
+
+-- Table Profil
+create table profil(
+    idProfil serial PRIMARY KEY,
+    nomProfil VARCHAR(30),
+    expMin DECIMAL(10, 2) DEFAULT 0,
+    expMax DECIMAL(10, 2),
+    tauxAug DECIMAL(10, 2),
+    tipe VARCHAR(3) DEFAULT "ref",
+    tauxHor DECIMAL(10, 2)
+);
+
+--Table Emplpoye
+create table(
+    idEmploye serial PRIMARY KEY,
+    nom VARCHAR(30),
+    dateEmbauche date,
+    profilEmbauche INT,
+    FOREIGN KEY (profilEmbauche) REFERENCES profil(idProfil)
+);
+
