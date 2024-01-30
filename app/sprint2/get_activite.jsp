@@ -20,5 +20,6 @@
             <%for(Activite bouquet : bouquets){%>
                 <p><a href="sprint2_voyage?idactivite=<% out.print(bouquet.getIdActivite()); %>"> <% out.print(bouquet.getNomActivite()); %></a></p>
             <%}%>
+    <p><a href="../index.html">Accueil</a></p>
 </body>
 </html>

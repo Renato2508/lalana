@@ -84,11 +84,11 @@ create table reservation(
 create table profil(
     idProfil serial PRIMARY KEY,
     nomProfil VARCHAR(30),
-    expMin DECIMAL(10, 2) DEFAULT 0,
-    expMax DECIMAL(10, 2),
-    tauxAug DECIMAL(10, 2),
-    tipe VARCHAR(3) DEFAULT "notref",
-    tauxHor DECIMAL(10, 2)
+    expMin  decimal DEFAULT 0,
+    expMax decimal,
+    tauxAug decimal,
+    tipe VARCHAR(3),
+    tauxHor decimal
 );
 
 --Table Emplpoye
@@ -99,4 +99,3 @@ create table employe(
     profilEmbauche INT,
     FOREIGN KEY (profilEmbauche) REFERENCES profil(idProfil)
 );
-

@@ -43,6 +43,6 @@
         <li><% out.print(activite.getNomActivite()); %></li>
         <%}%>
     </ul>
-    <button><a href="index.html">Retour</a></button>
+    <button><a href="../index.html">Retour</a></button>
 </body>
 </html>

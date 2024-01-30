@@ -63,5 +63,6 @@ button:hover {
         <input name="nomBouquet" type="text" id="nomBouquet">
         <input type="submit" value="Enregistrer">
     </form>
+    <p><a href="index.html">Accueil</a></p>
 </body>
 </html>

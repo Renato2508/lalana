@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import = "java.util.*" %>
 <%@ page import = "voyage.*" %>
+<%@ page import = "voyage.sprint6.*" %>
 
 <%  
     List<Profil> profils = (List<Profil>)request.getAttribute("liste");
@@ -26,7 +27,7 @@
             <%for(Profil e : profils){
 
             %>
-            <option value="<%= e.getIdProfil() %>"><% e.getNomProfil(); %></option>
+            <option value="<%= e.getIdprofil() %>"><% e.getNom(); %></option>
             <%}%>
         </select>        
         <label for="DateEmb">

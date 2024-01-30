@@ -32,7 +32,7 @@
                 <td><% out.print(voyage.getPrix()); %></td>
             </tr>            
         <%}%>
-
+    <p><a href="../index.html">Accueil</a></p>
     </table>
 </body>
 </html>

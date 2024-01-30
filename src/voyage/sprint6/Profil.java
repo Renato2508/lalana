@@ -13,20 +13,20 @@ public class Profil {
     @DBField(name="nomprofil")
     String nom;
     
-    @DBField(name="experiencemin")
+    @DBField(name="expmin")
     Double expericenceMin;
     
-    @DBField(name="experiencemax")
+    @DBField(name="expmax")
     Double experienceMax;
 
     
-    @DBField(name="tauxaugmente")
+    @DBField(name="tauxaug")
     Double tauxAugmente;
     
-    @DBField(name="type")
+    @DBField(name="tipe")
     String type;
     
-    @DBField(name="tauxhoraire")
+    @DBField(name="tauxhor")
     Double tauxHoraire;
 
 
