@@ -104,5 +104,6 @@
         </label>
         <label><input type="submit" value="Creer l'activite"> </label>
     </form>
+    <p><a href="index.html">Accueil</a></p>
 </body>
 </html>

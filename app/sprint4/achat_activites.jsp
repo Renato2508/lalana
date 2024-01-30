@@ -31,6 +31,7 @@
         <p>Date: <input type="date" name = "date"></p>
         <p><input type="submit" value="OK"></p>
     </form>
+    <p><a href="../index.html">Accueil</a></p>
 <body>
     
 </body>

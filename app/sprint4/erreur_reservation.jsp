@@ -35,7 +35,7 @@
                 <td><% out.print(compo.getFrequence()); %></td>
             </tr>            
         <%}%>
-
+<p><a href="../index.html">Accueil</a></p>
     </table>
 </body>
 </html>

@@ -13,20 +13,20 @@ public class Profil {
     @DBField(name="nomprofil")
     String nom;
     
-    @DBField(name="experiencemin")
+    @DBField(name="expmin")
     Double expericenceMin;
     
-    @DBField(name="experiencemax")
+    @DBField(name="expmax")
     Double experienceMax;
 
     
-    @DBField(name="tauxaugmente")
+    @DBField(name="tauxaug")
     Double tauxAugmente;
     
-    @DBField(name="type")
+    @DBField(name="tipe")
     String type;
     
-    @DBField(name="tauxhoraire")
+    @DBField(name="tauxhor")
     Double tauxHoraire;
 
 
@@ -39,7 +39,13 @@ public class Profil {
 
     public Profil(String nom, String expericenceMin, String experienceMax, String tauxAugmente, String type, String tauxHoraire) {
         try {
-                    this.tauxHoraire = Double.valueOf(tauxHoraire);
+            this.tauxHoraire = Double.valueOf(tauxHoraire);
+            this.type = type;
+            this.tauxAugmente = Double.valueOf(tauxAugmente);
+            this.experienceMax = Double.valueOf(experienceMax);
+            this.expericenceMin = Double.valueOf(expericenceMin);
+            this.nom = nom;
+
 
         } catch (Exception e1) {
            
