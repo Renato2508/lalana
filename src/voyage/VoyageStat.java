@@ -24,7 +24,7 @@ public class VoyageStat implements Serializable{
         try {
             Connection c = GenericDAO.getConnection();
             List<VoyageStat> res = new ArrayList<VoyageStat>();
-        String query = "SELECT * FROM v_stat order by idbouquet, idlocalisation, idduree, sexe asc";
+        String query = "SELECT * FROM v_statistiques order by idbouquet, idlocalisation, idduree, sexe asc";
         
         // Preparation de la requête SQL paramétrée
         PreparedStatement statement = c.prepareStatement(query);            

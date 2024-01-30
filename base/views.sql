@@ -20,13 +20,27 @@ CREATE VIEW v_bouquet_prix AS
     FROM v_composition as vc
     group by idbouquet, nombouquet, idLocalisation, nomlocalisation, idduree, nomduree;
 
+create or replace view v_voyages_existants_genre as
+    select *
+    from bouquet as b
+    cross join localisation as l
+    cross join duree as d
+    cross join (VALUES ('hom'), ('fem')) AS temp_table(sexe);
 
-create view v_stat as
- SELECT idbouquet, nombouquet, idlocalisation, nomlocalisation, idduree, nomduree, sexe, sum(qte_reservee) as vendu
+
+
+
+create or replace view v_statistiques as
+ SELECT v.idbouquet, v.nombouquet, v.idlocalisation, v.nomlocalisation, v.idduree, v.nomduree, v.sexe, coalesce(sum(qte_reservee),0) as vendu
     FROM reservation as r
-    natural join bouquet as b
-    natural join duree as d
-    natural join localisation as l
     natural join client as c
-    group by idbouquet, nombouquet, idLocalisation, nomlocalisation, idduree, nomduree, sexe;
-    order by idbouquet, idlocalisation, idduree, sexe asc
+    right join v_voyages_existants_genre as v on
+        r.idbouquet = v.idbouquet
+        and r.idlocalisation = v.idlocalisation
+        and r.idduree = v.idduree
+        and c.sexe = v.sexe
+    group by v.idbouquet, v.nombouquet, v.idLocalisation, v.nomlocalisation, v.idduree, v.nomduree, v.sexe;
+
+    order by b.idbouquet, l.idlocalisation, d.idduree, sexe asc
+
+
