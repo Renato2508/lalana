@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Statistiques de vente</title>
+    <style>
+        body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+}
+
+.d-flex {
+    display: flex;
+}
+
+.flex-wrap {
+    flex-wrap: wrap;
+}
+
+.justify-content-between {
+    justify-content: space-between;
+}
+
+.card-title {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.table-responsive {
+    overflow-x: auto;
+}
+
+.table {
+    width: 100%;
+    margin-bottom: 1rem;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #dee2e6;
+}
+
+th {
+    background-color: #007bff;
+    color: #fff;
+}
+
+tbody tr:hover {
+    background-color: rgba(0, 123, 255, 0.1);
+}
+
+.font-weight-bold {
+    font-weight: bold;
+}
+
+.btn-secondary {
+    color: #fff;
+    background-color: #6c757d;
+    border-color: #6c757d;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+    border-color: #545b62;
+    color: #fff;
+}
+
+    </style>
+</head>
+<body>
+    <div class="d-flex flex-wrap justify-content-between">
+        <h4 class="card-title mb-3">Project status</h4>
+    </div>
+    <div id="table-container" class="table-responsive"></div>
+
+    <!-- Lien vers le fichier JavaScript externe -->
+    <script src ="./js/affTab.js"></script>
+    <script>
+        
+    
+        
+///         damoitu@gamil.com
+
+function afficherTableau(data) {
+  // Données pour le tableau
+  console.log("------->DONNEES:")
+  /*var data = [
+      { produit: 'Voyage premium', homme: '2322', femme: '88' },
+      { produit: 'Voyage', homme: '12022', femme: '70' },
+      { produit: 'Bentley', homme: '8,725', femme: '87' },
+      { produit: 'Morgan', homme: '5,220', femme: '65' },
+      { produit: 'Voyage premium', homme: '2322', femme: '88' }
+  ];*/
+
+  console.log(data);
+
+
+  // Création du tableau
+  var table = document.createElement('table');
+  table.className = 'table';
+
+  // Création de l'en-tête du tableau
+  var thead = document.createElement('thead');
+  var headerRow = document.createElement('tr');
+  var columns = ['produit', 'Vendu homme', 'Vendu femme'];
+  var keys = ['nom', 'nbhom', 'nbfem'];
+
+  columns.forEach(function (column) {
+      var th = document.createElement('th');
+      th.textContent = column;
+      headerRow.appendChild(th);
+  });
+
+  thead.appendChild(headerRow);
+  table.appendChild(thead);
+
+  // Création du corps du tableau
+  var tbody = document.createElement('tbody');
+
+    data.forEach(function (rowData) {
+    var row = document.createElement('tr');
+
+      // Ajout des cellules de données
+    keys.forEach(function (column) {
+          var cell = document.createElement('td');
+          cell.textContent = rowData[column.toLowerCase()]; // Utilisez la version minuscule pour correspondre aux propriétés des objets
+          row.appendChild(cell);
+    });
+
+    tbody.appendChild(row);
+    });
+
+    table.appendChild(tbody);
+
+    // Ajout du tableau au document (par exemple, à un élément avec l'ID 'table-container')
+    var tableContainer = document.getElementById('table-container');
+    tableContainer.innerHTML = ''; // Efface tout contenu existant dans le conteneur
+    tableContainer.appendChild(table);
+    }
+
+    // Appeler la fonction ajax 
+    fetchAndParseJSON("http://localhost:8080/voyage/stat", afficherTableau)
+    </script>
+</body>
+</html>
