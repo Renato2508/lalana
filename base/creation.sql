@@ -84,11 +84,11 @@ create table reservation(
 create table profil(
     idProfil serial PRIMARY KEY,
     nomProfil VARCHAR(30),
-    expMin  decimal DEFAULT 0,
-    expMax decimal,
-    tauxAug decimal,
+    expMin  doubleprecision DEFAULT 0,
+    expMax doubleprecision,
+    tauxAug doubleprecision,
     tipe VARCHAR(3),
-    tauxHor decimal
+    tauxHor doubleprecision
 );
 
 --Table Emplpoye

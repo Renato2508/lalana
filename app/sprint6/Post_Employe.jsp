@@ -14,27 +14,40 @@
     <title>Document</title>
 </head>
 <body>
+    
     <h1>Embauche Employe</h1>
-    <form action="#" method="post">
-        <label for="Nom">
-            Nom
-        </label>
-        <input type="text" name="Nom">
-        <label for="Profil">
-            Profil 
-        </label>
-        <select name="profil" id="" disabled="disabled">
-            <%for(Profil e : profils){
+    <form action="sprint6_Employe" method="post">
+        <p>
+            <label for="Nom">
+                Nom
+            </label>
+            <input type="text" name="Nom">
+        </p>
+        <p>
+             <label for="Profil">
+                 Profil 
+             </label>
+             <select name="profil" id="">
+                 <%for(Profil e : profils){
+                 %>
+                 <option value="<%= e.getIdprofil() %>"><%= e.getNom() %></option>
+                 <%}%>
+             </select> 
+        </p>  
 
-            %>
-            <option value="<%= e.getIdprofil() %>"><% e.getNom(); %></option>
-            <%}%>
-        </select>        
+        <p>    
         <label for="DateEmb">
             Date embauche
         </label>
-        <input type="date" name="DateEmb">
-        <input type="button" value="OK">
+        
+        <input type="date" name="date">
+        </p>
+
+        <p> 
+        <input type="submit" value="OK">
+        </p>
     </form>
+    <p><a href="../index.html">Accueil</a></p>
+
 </body>
 </html>

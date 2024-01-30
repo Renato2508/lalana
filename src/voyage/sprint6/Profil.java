@@ -94,8 +94,9 @@ public class Profil {
     }
 
     public static List<Profil> getAll()throws Exception{
-        return GenericDAO.getAll(Profil.class);
-
+        List<Profil> lp = GenericDAO.getAll(Profil.class);
+        System.out.println("-------> Profils: "+lp);
+        return lp;
     }
 
     public Integer getIdprofil() {

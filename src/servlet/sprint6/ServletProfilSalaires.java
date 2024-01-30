@@ -14,13 +14,13 @@ import voyage.sprint6.Employe;
 @WebServlet("/sprint6_ProfSalaire")
 public class ServletProfilSalaires extends HttpServlet{
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Date daty = Date.valueOf(request.getParameter("daty"));
         try {
             Employe.getWithActualProfiles();
             request.setAttribute("employes", Employe.getWithActualProfiles());
-            RequestDispatcher rd = request.getRequestDispatcher("sprint6/Get_Profils_result");
+            RequestDispatcher rd = request.getRequestDispatcher("sprint6/Get_Profils_result.jsp");
+            rd.forward(request, response);
         } catch (Exception e) {
-            // TODO: handle exception
+            e.printStackTrace();
         }
         
     }

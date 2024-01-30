@@ -15,9 +15,10 @@ import voyage.sprint6.Employe;
 @WebServlet("/sprint6_Employe")
 public class ServletEmploye extends HttpServlet{
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String Nom = String.valueOf(request.getParameter("Nom"));
-        String idProfil = String.valueOf(request.getParameter("profil"));
-        String dateEmbauche = String.valueOf(request.getParameter("DateEmb"));
+        String Nom = request.getParameter("Nom");
+        String idProfil = request.getParameter("profil");
+        String dateEmbauche = request.getParameter("date");
+        System.out.println("------> DATE: "+dateEmbauche);
         Employe employe = new Employe(Nom, dateEmbauche, idProfil);
         try {
             employe.save();

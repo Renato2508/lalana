@@ -60,6 +60,7 @@ public class Employe {
                 p = new Profil();
 
                 e.setNom(resultSet.getString("nom"));
+                e.setDateEmbauche(resultSet.getDate("dateembauche"));
                 p.setNom(resultSet.getString("nomprofil"));
                 p.setTauxHoraire(resultSet.getDouble("tauxHoraire"));
                 e.setProfil(p);
