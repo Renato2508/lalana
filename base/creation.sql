@@ -65,10 +65,17 @@ create table mouvement(
 
 );
 
+create table client(
+    idclient serial primary key,
+    nomclient varchar,
+    sexe varchar(3)
+);
+
 create table reservation(
     idbouquet int references bouquet(idbouquet),
     idLocalisation INT REFERENCES localisation(idLocalisation),
     idduree INT REFERENCES duree(idduree),
     qte_reservee INT,
-    date_reservation date
+    date_reservation date,
+    idclient int references client(idclient)
 );

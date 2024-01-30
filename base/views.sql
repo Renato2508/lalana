@@ -19,3 +19,14 @@ CREATE VIEW v_bouquet_prix AS
     SELECT idbouquet, nombouquet, idlocalisation, nomlocalisation, idduree, nomduree, sum(prixunitaire*frequence) as prix
     FROM v_composition as vc
     group by idbouquet, nombouquet, idLocalisation, nomlocalisation, idduree, nomduree;
+
+
+create view v_stat as
+ SELECT idbouquet, nombouquet, idlocalisation, nomlocalisation, idduree, nomduree, sexe, sum(qte_reservee) as vendu
+    FROM reservation as r
+    natural join bouquet as b
+    natural join duree as d
+    natural join localisation as l
+    natural join client as c
+    group by idbouquet, nombouquet, idLocalisation, nomlocalisation, idduree, nomduree, sexe;
+    order by idbouquet, idlocalisation, idduree, sexe asc

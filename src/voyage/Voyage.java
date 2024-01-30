@@ -20,14 +20,14 @@ public class Voyage {
 
 
 
-
+    public Voyage(){}
     public Voyage(Bouquet bouquet, Localisation localisation, Duree duree) {
         this.bouquet = bouquet;
         this.localisation = localisation;
         this.duree = duree;
     }
 
-    public void reserver(int nb_pers, Date d)throws LackExceptions, Exception{
+    public void reserver(int nb_pers, Date d, String id_client)throws LackExceptions, Exception{
         Connection c = null;
         try {
 
@@ -56,7 +56,7 @@ public class Voyage {
                 throw new LackExceptions(compos);
 
             }else{
-                String query = "INSERT INTO reservation(date_reservation,idbouquet, idduree, idLocalisation, qte_reservee) VALUES (?, ?, ?, ?,?)";
+                String query = "INSERT INTO reservation(date_reservation,idbouquet, idduree, idLocalisation, qte_reservee, idclient) VALUES (?, ?, ?, ?,?,?)";
             
                 // Préparation de la requête SQL paramétrée
                 try (PreparedStatement statement = c.prepareStatement(query)) {
@@ -71,6 +71,7 @@ public class Voyage {
                     statement.setInt(3, idDuree);
                     statement.setInt(4, idLocalisation);
                     statement.setInt(5, nb_pers);
+                    statement.setInt(6,Integer.valueOf(id_client));
 
                     // Exécution de la requête d'insertion
                     statement.executeUpdate();
@@ -152,7 +153,7 @@ public class Voyage {
             compo = new Composit(activite, resultSet.getInt("frequence")); 
             System.out.println("COMPO_C:    "+compo);     
             v.getComposition().add(compo);
-            System.out.println("Liste dee la composition deu voyage: "+this.composition);
+            //System.out.println("Liste dee la composition deu voyage: "+this.composition);
 
 
             }

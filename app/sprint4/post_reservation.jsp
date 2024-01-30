@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import = "java.util.*" %>
 <%@ page import = "voyage.*" %>
+<%@ page import = "voyage.sprint7.*" %>
 
 <%  
     HashMap<String, Voyage> voyages = Voyage.getAll_voyages();
     Set<Map.Entry<String,Voyage>> entries = voyages.entrySet();
+    List<Client> clients = (List<Client> )request.getAttribute("clients");
 %>
 
 <!DOCTYPE html>
@@ -26,6 +28,18 @@
             %>
             <option value="<%= cle %>"><% out.print(nom); %></option>
             <%}%>
+        </select>
+
+        <select name="idclient" >
+            <%for(Client c: clients){
+            %>
+                <option value="<%= c.getIdClient() %>">
+                    <%= c.getNom() %>
+                </option>
+            <%    
+            }
+            %>
+            
         </select>
         <p>Nombre de personnes: <input type="text" name="nb"></p>
         <p>Date: <input type="date" name = "date"></p>
