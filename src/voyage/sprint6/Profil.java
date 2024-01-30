@@ -39,7 +39,13 @@ public class Profil {
 
     public Profil(String nom, String expericenceMin, String experienceMax, String tauxAugmente, String type, String tauxHoraire) {
         try {
-                    this.tauxHoraire = Double.valueOf(tauxHoraire);
+            this.tauxHoraire = Double.valueOf(tauxHoraire);
+            this.type = type;
+            this.tauxAugmente = Double.valueOf(tauxAugmente);
+            this.experienceMax = Double.valueOf(experienceMax);
+            this.expericenceMin = Double.valueOf(expericenceMin);
+            this.nom = nom;
+
 
         } catch (Exception e1) {
            

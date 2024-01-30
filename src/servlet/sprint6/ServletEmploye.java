@@ -10,9 +10,10 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import voyage.sprint6.Employe;
 
 @WebServlet("/sprint6_Employe")
-public class ServletProfil extends HttpServlet{
+public class ServletEmploye extends HttpServlet{
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String Nom = String.valueOf(request.getParameter("Nom"));
         String idProfil = String.valueOf(request.getParameter("profil"));
