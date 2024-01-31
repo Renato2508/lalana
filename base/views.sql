@@ -22,22 +22,24 @@ CREATE VIEW v_bouquet_prix AS
 
 
 create or replace view v_calcul_anciennete as
-select idemploye,   DATE_PART('year', age(CURRENT_DATE, date1)) +
-                    DATE_PART('month', age(CURRENT_DATE, date1)) / 12.0 +
-                    DATE_PART('day', age(CURRENT_DATE, date1)) / 365.25 + p.experienceMin as anciennete
+select e.idemploye,   (DATE_PART('year', age(CURRENT_DATE, e.dateembauche)) +
+                    DATE_PART('month', age(CURRENT_DATE, e.dateembauche)) / 12.0 +
+                    DATE_PART('day', age(CURRENT_DATE, e.dateembauche)) / 365.25 + p.expmin) as anciennete
 from employe as e 
-natural join profil ;
+join profil as p on e.profilembauche = p.idprofil;
 
 create or replace view v_taux_horaire as
-select tauxhoraire
+select tauxhor as tauxhoraire
 from profil 
-where type = "ref";
+where tipe = 'ref';
 
 create or replace view v_taux_horaire_actuel as 
-select a.idemploye, p.idprofil, (t.tauxhoraire * p.tauxaugemente) as tauxhoraire
+select a.idemploye, p.idprofil, coalesce((t.tauxhoraire * p.tauxaug), t.tauxhoraire) as tauxhoraire
 from v_calcul_anciennete as a
-join profil as p on (a.anciennete >= p.experiencemin and a.anciennete < p.experiencemax) or(a.anciennete >= p.exepriencemin and p.experiencemax is null); 
 cross join v_taux_horaire as t
+join profil as p on (a.anciennete >= p.expmin and a.anciennete < p.expmax) 
+                    or(a.anciennete >= p.expmin and p.expmax is null)
+;
 
 create or replace view v_taux_horaire_actuel_final as 
 select e.*, p.*, tx.tauxhoraire
