@@ -18,6 +18,47 @@ public class Duree{
     @DBField(name="dureeMax")
     Integer dureeMax;   
 
+    @DBField(name="tipe")
+    String tipe;
+
+    @DBField(name="volHorRef")
+    Double volHorRef;
+
+    @DBField(name="tauxAugmente")
+    Double augmentation;
+
+    public Duree(String nomDuree, String  dureeMin, String  dureeMax, String tipe, String volHorRef,
+            String augmentation) {
+        this.nomDuree = nomDuree;
+         this.dureeMax = Integer.valueOf(dureeMax);
+        this.dureeMin = Integer.valueOf(dureeMin);    
+        this.tipe = tipe;
+
+
+        try {
+            this.volHorRef = Double.valueOf(volHorRef);
+
+        } catch (Exception e1) {
+             this.volHorRef = null;
+        }
+
+        
+        try {
+             this.augmentation = Double.valueOf(augmentation);
+        } catch (Exception e2) {
+             this.augmentation  = null;  
+        }
+    }
+
+    public Duree(String nomDuree, Integer dureeMin, Integer dureeMax, String tipe, Double volHorRef,
+            Double augmentation) {
+        this.nomDuree = nomDuree;
+        this.dureeMin = dureeMin;
+        this.dureeMax = dureeMax;
+        this.tipe = tipe;
+        this.volHorRef = volHorRef;
+        this.augmentation = augmentation;
+    }
 
     public Duree(Integer idDuree, String nomDuree) {
         this.idDuree = idDuree;
@@ -85,6 +126,30 @@ public class Duree{
 
     public void setDureeMax(Integer dureeMax) {
         this.dureeMax = dureeMax;
+    }
+
+    public String getTipe() {
+        return tipe;
+    }
+
+    public void setTipe(String tipe) {
+        this.tipe = tipe;
+    }
+
+    public Double getVolHorRef() {
+        return volHorRef;
+    }
+
+    public void setVolHorRef(Double volHorRef) {
+        this.volHorRef = volHorRef;
+    }
+
+    public Double getAugmentation() {
+        return augmentation;
+    }
+
+    public void setAugmentation(Double augmentation) {
+        this.augmentation = augmentation;
     }
 
 }    

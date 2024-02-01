@@ -16,14 +16,18 @@ import java.util.List;
 public class ServletBouquet  extends HttpServlet{
         protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
             String nomBouquet=request.getParameter("nomBouquet");
-            Bouquet b =new Bouquet (nomBouquet);
+           
+            String tipe = request.getParameter("tipe");
+            String nbtravailleurs = request.getParameter("nbtravailleurs");
+            String aug = request.getParameter("aug");
+
+            Bouquet b =new Bouquet (nomBouquet, tipe,nbtravailleurs,aug);
             try {
                 b.save();
             } catch (Exception e) {
                 e.printStackTrace();
                 
             }
-            request.setAttribute(nomBouquet, nomBouquet);
             response.sendRedirect("Post_Bouquet.jsp");
         }
 

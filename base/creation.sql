@@ -12,14 +12,19 @@ CREATE TABLE activite (
 -- Table bouquet
 CREATE TABLE bouquet (
     idbouquet SERIAL PRIMARY KEY,
-    nombouquet VARCHAR
+    nombouquet VARCHAR,
+    tipe varchar(3)
+    nombreEmpref double precision,
+    tauxAugmente double precision
+
 );
 
 -- Table activitebouquet
 CREATE TABLE activitebouquet (
     idActiviteBouquet SERIAL PRIMARY KEY,
     idActivite INT REFERENCES activite(idactivite),
-    idBouquet INT REFERENCES bouquet(idbouquet)
+    idBouquet INT REFERENCES bouquet(idbouquet),
+   
 );
 
 
@@ -28,7 +33,11 @@ CREATE TABLE duree (
     idduree SERIAL PRIMARY KEY,
     nomduree VARCHAR,
     dureeMin INT,
-    dureeMax INT
+    dureeMax INT,
+    tipe varchar(3),
+    volHorRef double precision,
+    tauxAugmente double precision,
+
 );
 
 -- Table localisation
@@ -84,11 +93,11 @@ create table reservation(
 create table profil(
     idProfil serial PRIMARY KEY,
     nomProfil VARCHAR(30),
-    expMin  doubleprecision DEFAULT 0,
-    expMax doubleprecision,
-    tauxAug doubleprecision,
+    expMin  double precision DEFAULT 0,
+    expMax double precision,
+    tauxAug double precision,
     tipe VARCHAR(3),
-    tauxHor doubleprecision
+    tauxHor double precision
 );
 
 --Table Emplpoye
@@ -98,4 +107,17 @@ create table employe(
     dateEmbauche date,
     profilEmbauche INT,
     FOREIGN KEY (profilEmbauche) REFERENCES profil(idProfil)
+);
+
+
+create table voyageprix(
+    idbouquet int references bouquet(idbouquet),
+    idduree int references duree(idduree),
+    idLocalisation int references localisation(idLocalisation),
+    prix_vente double precision,
+    datemodif date
+);
+
+create table tauxhoraire(
+    tauxBase double precision
 );

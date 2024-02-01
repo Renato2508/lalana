@@ -61,8 +61,32 @@ button:hover {
     <form action="bouquet" method="post">
         <label for="nomBouquet">Nom de votre bouquet</label>
         <input name="nomBouquet" type="text" id="nomBouquet">
+        
+        <p>
+            Type du bouquet
+             <select name="tipe" id="">
+                <option value="ref">De référence</option>
+                <option value="ord">Ordinaire</option>
+    
+            </select>   
+            </p>
+        
+          <p>
+            Nombre travailleurs de base(si nécessaire)       
+           <input name="nbtravailleurs" type="text" id="nomBouquet">
+        </p>
+    
+        <p>
+            Augmentation Relative      
+           <input name="aug" type="text" id="nomBouquet">
+        </p>
+        <p><a href="index.html">Accueil</a></p>
+
         <input type="submit" value="Enregistrer">
     </form>
-    <p><a href="index.html">Accueil</a></p>
+
+</body>
+    
+    
 </body>
 </html>

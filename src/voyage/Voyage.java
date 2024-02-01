@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import generalisation.genericDAO.GenericDAO;
 import voyage.exception.LackException;
@@ -15,6 +16,19 @@ public class Voyage {
     Bouquet bouquet;
     Localisation localisation;
     Duree duree;
+    double revient;
+    double vente;
+    double benefice;
+
+
+
+
+    public double getRevient() {
+        return revient;
+    }
+    public void setRevient(double revient) {
+        this.revient = revient;
+    }
     ArrayList<Composit> composition = new ArrayList<Composit>();
     static HashMap<String, Voyage> all_voyages;
 
@@ -25,6 +39,174 @@ public class Voyage {
         this.bouquet = bouquet;
         this.localisation = localisation;
         this.duree = duree;
+    }
+
+    public static  List<Voyage>  get_all_with_benefice_bet(String min, String max) throws Exception{
+        String sql = "select * from v_benefice_all where benefice >= ? and benefice <=  ?";
+        ArrayList<Voyage> res = new ArrayList<Voyage>();
+        Connection c = null;
+        PreparedStatement pst = null;
+        try {
+             c = GenericDAO.getConnection();
+            pst = c.prepareStatement(sql);
+            pst.setDouble(1, Double.valueOf(min));
+            pst.setDouble(2, Double.valueOf(max));
+
+            ResultSet rst = pst.executeQuery();
+
+            Bouquet bouquet;
+            Localisation localisation;
+            Duree duree;
+            Voyage v; 
+            while(rst.next()){
+
+                bouquet = new Bouquet(rst.getInt("idbouquet") , rst.getString("nombouquet"));
+                localisation = new Localisation(rst.getInt("idlocalisation"), rst.getString("nomlocalisation"));
+                duree = new Duree(rst.getInt("idduree"), rst.getString("nomduree"));
+                v = new Voyage(bouquet, localisation, duree);
+                v.setRevient(rst.getDouble("revient"));
+                v.setPrix_vente(rst.getDouble("prix_vente"));
+                v.setBenefice(rst.getDouble("benefice"));
+                res.add(v);
+
+            } 
+            
+        } catch (Exception e) {
+            throw e;
+        }
+        finally{
+            try {
+                pst.close();
+                c.close();
+            } catch (Exception e2) {
+                throw e2;
+            }
+
+        }
+
+        return res;
+
+    }
+    public static void setPrixVente(String idvoyage, String vente)throws Exception{
+                 Connection c = null;
+                PreparedStatement pst = null;
+                PreparedStatement pst1 = null;
+                String[] id = Voyage.restoreBDL(idvoyage);
+                System.out.println(String.format("Liste: %s %s %s",id[0], id[1], id[2]));
+                
+                String query = "INSERT INTO voyageprix(idbouquet, idduree, idLocalisation, prix_vente) VALUES (?, ?, ?, ?)";
+
+                String query1 = "update voyageprix prix set prix_vente = ? where idbouquet = ? and idduree = ? and idlocalisation = ?";
+            
+                // Préparation de la requête SQL paramétrée
+                try {
+                    c = GenericDAO.getConnection();
+                    pst1 = c.prepareStatement(query1);
+                    pst = c.prepareStatement(query);
+                    
+                    int idBouquet = Integer.valueOf(id[0]);
+                    int idLocalisation = Integer.valueOf(id[2]);
+                    int idDuree =Integer.valueOf(id[1]);
+
+                    // Attribution des valeurs aux paramètres de la requête
+                    pst1.setInt(1, idBouquet);
+                    pst1.setInt(2, idDuree);
+                    pst1.setInt(3, idLocalisation);
+                    pst1.setDouble(4,Double.valueOf(vente));
+
+                    
+                    // Exécution de la requête d'insertion
+                    int insert = pst1.executeUpdate();
+                    if(insert == 0){
+                        pst = c.prepareStatement(query);
+                        pst.setDouble(4,Double.valueOf(vente) );
+                        pst.setInt(1, idBouquet);
+                        pst.setInt(2, idDuree);
+                        pst.setInt(3, idLocalisation);
+                    
+                    // Exécution de la requête d'insertion
+                        pst.executeUpdate();
+
+                    }
+                    c.commit();
+                }
+                catch(Exception e){
+                    try {
+                        c.rollback();
+                    } catch (Exception e2) {
+                        throw e2;
+                    }
+                    throw e;
+                }
+                finally{
+                try {
+                    pst1.close();
+                    pst.close();
+                    c.close();
+                } catch (Exception e2) {
+                    throw e2;
+                }
+
+        }
+    }
+
+    public String getBDLId(){
+        String res = null;
+        res= String.format("%s#%s#%s", this.bouquet.getIdBouquet(), this.duree.getIdDuree(), this.localisation.getIdLocalisation());
+        return res;
+    }
+
+    public static String[] restoreBDL(String id){
+        return id.split( "#");
+    }
+
+    public String getBDLNom(){
+        String res = null;
+        res= String.format("Voyage %s %s %s", this.bouquet.getNomBouquet(), this.duree.getNomDuree(), this.localisation.getNomLocalisation());
+        return res;
+    }
+
+
+    public static List<Voyage> get_all_with_revient()throws Exception{
+        String sql = "select * from v_revient_all";
+        ArrayList<Voyage> res = new ArrayList<Voyage>();
+        Connection c = null;
+        PreparedStatement pst = null;
+        try {
+             c = GenericDAO.getConnection();
+            pst = c.prepareStatement(sql);
+            ResultSet rst = pst.executeQuery();
+
+            Bouquet bouquet;
+            Localisation localisation;
+            Duree duree;
+            double revient;
+            Voyage v; 
+            while(rst.next()){
+
+                bouquet = new Bouquet(rst.getInt("idbouquet") , rst.getString("nombouquet"));
+                localisation = new Localisation(rst.getInt("idlocalisation"), rst.getString("nomlocalisation"));
+                duree = new Duree(rst.getInt("idduree"), rst.getString("nomduree"));
+                v = new Voyage(bouquet, localisation, duree);
+                v.setRevient(rst.getDouble("revient"));
+                res.add(v);
+
+            } 
+            
+        } catch (Exception e) {
+            throw e;
+        }
+        finally{
+            try {
+                pst.close();
+                c.close();
+            } catch (Exception e2) {
+                throw e2;
+            }
+
+        }
+
+        return res;
     }
 
     public void reserver(int nb_pers, Date d, String id_client)throws LackExceptions, Exception{
@@ -197,5 +379,19 @@ public class Voyage {
     public static void setAll_voyages(HashMap<String, Voyage> all_voyages) {
         Voyage.all_voyages = all_voyages;
     }
+    
+public double getPrix_vente() {
+    return vente;
+}
+public void setPrix_vente(double prix_vente) {
+    this.vente = prix_vente;
+}
+public double getBenefice() {
+    return benefice;
+}
+public void setBenefice(double benefice) {
+    this.benefice = benefice;
+}
+
 
 }

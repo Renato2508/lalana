@@ -21,10 +21,47 @@ public class Bouquet {
     @DBField(name="nombouquet")
     String nomBouquet;
 
+    @DBField(name="tipe")
+    String tipe;
+
+    @DBField(name="nbrEmpref")
+    Double nbTravRef;
+
+    @DBField(name="tauxAugmente")
+    Double augmentation;
+
     ArrayList<Activite> activites = new ArrayList<Activite>();
 
+    public Bouquet(String nomBouquet, String tipe, String nbTravRef, String augmentation) {
+        this.nomBouquet = nomBouquet;
+        this.tipe = tipe;
+
+   
+      
+
+        try {
+            this.nbTravRef = Double.valueOf(nbTravRef);
+        } catch (Exception e) {
+                nbTravRef = null;
+        }
+
+
+        try {
+              this.augmentation = Double.valueOf(augmentation);
+        } catch (Exception e2) {
+            this.augmentation = null;
+        }
+    }
+
     
-    
+    public Bouquet(String nomBouquet, String tipe, Double nbTravRef, Double augmentation) {
+        this.nomBouquet = nomBouquet;
+        this.tipe = tipe;
+        this.nbTravRef = nbTravRef;
+        this.augmentation = augmentation;
+    }
+
+
     public Bouquet() {
     }
 
@@ -110,6 +147,36 @@ public class Bouquet {
     }
     public void setActivites(ArrayList<Activite> activites) {
         this.activites = activites;
+    }
+
+
+    public String getTipe() {
+        return tipe;
+    }
+
+
+    public void setTipe(String tipe) {
+        this.tipe = tipe;
+    }
+
+
+    public Double getNbTravRef() {
+        return nbTravRef;
+    }
+
+
+    public void setNbTravRef(Double nbTravRef) {
+        this.nbTravRef = nbTravRef;
+    }
+
+
+    public Double getAugmentation() {
+        return augmentation;
+    }
+
+
+    public void setAugmentation(Double augmentation) {
+        this.augmentation = augmentation;
     }
 
     

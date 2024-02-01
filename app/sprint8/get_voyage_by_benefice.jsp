@@ -3,12 +3,13 @@
 <%@ page import = "voyage.*" %>
 
 <%
-    List<Composition> voyages = (List<Composition>)request.getAttribute("voyages");
+    List<Voyage> voyages = (List<Voyage>)request.getAttribute("voyages");
 %>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
@@ -37,29 +38,32 @@ th, td {
     text-align: left;
 }
     </style>
-    <title>Document</title>
-    <h1>Liste des Activités possibles</h1>
+    <title>Recherche par benefice</title>
 </head>
 
 <body>
-    <h2>Liste des voyages correspondants</h2>
-    <table border ="1">
+    <h2>Liste des voyages correspondants à l fourchette</h2>
+    <table border="1">
         <tr>
-            <th>Bouquet</th>
-            <th>Localisation</th>
-            <th>Durée</th>
-            <th>Fréquence</th>
+            <th>Voyage</th>
+            <th>Prix de revient</th>
+            <th>Prix de vente</th>
+            <th>Bénéfice</th>
         </tr>
 
-        <%for(Composition voyage : voyages){%>
+        <%for(Voyage voyage : voyages){%>
             <tr>
-                <td><% out.print(voyage.getBouquet().getNomBouquet()); %></td>
-                <td><% out.print(voyage.getLocalisation().getNomLocalisation()); %></td>
-                <td><% out.print(voyage.getDuree().getNomDuree()); %></td>
-                <td><% out.print(voyage.getFrequence()); %></td>
+                <td><% out.print(voyage.getBDLNom()); %></td>
+                <td><% out.print(voyage.getRevient()); %></td>
+                <td><% out.print(voyage.getPrix_vente()); %></td>
+                <td><% out.print(voyage.getBenefice()); %></td>
             </tr>            
         <%}%>
-<p><a href="index.html">Accueil</a></p>
+    
     </table>
+    
+    <p><a href="index.html">Accueil</a></p>
+
+
 </body>
 </html>

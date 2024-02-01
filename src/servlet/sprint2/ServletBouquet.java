@@ -19,7 +19,7 @@ public class ServletBouquet  extends HttpServlet {
         String idbouquet = request.getParameter("idbouquet");
         String idlocalisation = request.getParameter("idlocalisation");
         String idduree = request.getParameter("idduree");
-
+        
         try {
 
             Connection c = GenericDAO.getConnection();

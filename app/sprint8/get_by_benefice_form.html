@@ -29,20 +29,16 @@ th, td {
     text-align: left;
 }
     </style>
-    <title>Nouveau client</title>
+    <title>Recherche par bénéfice</title>
 </head>
 <body>
-    <form action="../client" method="POST">
-        <p>Nom du client<input type="text" name ="nom"></p>
-        <p>Genre<select name="sexe" id="">
-            <option value="hom">homme</option>
-            <option value="fem">femme</option>
+    <form action="../sprint8_voyage_benefice" method="POST">
+        
+        <p>Bénéfice min: <input type="text" name="min"></p>       
+        <p>Bénéfice max: <input type="text" name="max"></p>       
 
-        </select></p>
-        <p><input type="submit" value="Enregistrer"></p>
-
-
+        <p><input type="Submit" value="OK"></p>
+        <p><a href="../index.html">Accueil</a></p>
     </form>
-    <p><a href="../index.html">Accueil</a></p>
 </body>
 </html>

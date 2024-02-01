@@ -13,6 +13,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>(2)Créer des compostions </title>
+    <style>
+        form {
+    margin: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+/* Styles généraux pour les tableaux */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+    </style>
 </head>
 
 <body>
@@ -36,7 +62,7 @@
 
             <p><input type="submit" value="OK"></p>
         </form>
-!
+
     <p><h2>Liste des activités pour le bouquet: <% out.print(b.getNomBouquet()); %> </h2></p>
     <ul>
         <%for(Activite activite : acts) { %>

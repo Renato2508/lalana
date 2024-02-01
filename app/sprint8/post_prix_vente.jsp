@@ -3,7 +3,7 @@
 <%@ page import = "voyage.*" %>
 
 <%
-    List<Composition> voyages = (List<Composition>)request.getAttribute("voyages");
+    List<Voyage> voyages = (List<Voyage>)request.getAttribute("voyages");
 %>
 
 <!DOCTYPE html>
@@ -44,21 +44,35 @@ th, td {
     <h2>Liste des voyages correspondants à l fourchette</h2>
     <table border="1">
         <tr>
-            <th>Bouquet</th>
-            <th>Localisation</th>
-            <th>Durée</th>
-            <th>Prix</th>
+            <th>Voyage</th>
+            <th>Prix de revient</th>
         </tr>
 
-        <%for(Composition voyage : voyages){%>
+        <%for(Voyage voyage : voyages){%>
             <tr>
-                <td><% out.print(voyage.getBouquet().getNomBouquet()); %></td>
-                <td><% out.print(voyage.getLocalisation().getNomLocalisation()); %></td>
-                <td><% out.print(voyage.getDuree().getNomDuree()); %></td>
-                <td><% out.print(voyage.getPrix()); %></td>
+                <td><% out.print(voyage.getBDLNom()); %></td>
+                <td><% out.print(voyage.getRevient()); %></td>
             </tr>            
         <%}%>
-    <p><a href="index.html">Accueil</a></p>
+    
     </table>
+    
+    <form action="sprint8_voyage" method="post">
+
+            <p>Voyage:
+                <select name="idvoyage">
+                    <% for(Voyage voyage : voyages) { %>
+                        <option value="<%= voyage.getBDLId() %>"> <% out.print(voyage.getBDLNom()) ; %></option>           
+                    <%}%>
+                </select>
+            </p>
+            <p>Prix de vente : <input name="vente" type="text" ></p>
+
+
+            <p><input type="submit" value="Valider"></p>
+        </form>
+    <p><a href="index.html">Accueil</a></p>
+
+
 </body>
 </html>

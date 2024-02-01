@@ -4,6 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Creer des durees de sejour</title>
+    <style>
+        form {
+    margin: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+/* Styles généraux pour les tableaux */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+    </style>
 </head>
 <body>
     <form action="../sejour" method="POST">
@@ -11,9 +37,30 @@
         <p>Denomination: <input type="text" name ="nom"></p>        
         <p>Duée min: <input type="text" name="min"></p>
         <p>Duree max: <input type="text" name="max"></p>
+
+        <p>
+            Type de la duréé
+            <select name="tipe" id="">
+                <option value="ref">De référence</option>
+                <option value="ord">Ordinaire</option>
+    
+            </select>   
+            </p>
         
-        <p><input type="Submit" value="OK"></p>
-        <p><a href="../index.html">Accueil</a></p>
+          <p>
+            Volume Horaire de base (si nécessaire)       
+           <input name="volHorRef" type="text" id="nomBouquet">
+        </p>
+    
+        <p>
+            Augmentation Relative      
+           <input name="aug" type="text" id="nomBouquet">
+        </p>
+
+        <input type="submit" value="Enregistrer">
+        
+        
     </form>
+    <p><a href="../index.html">Accueil</a></p>
 </body>
 </html>
